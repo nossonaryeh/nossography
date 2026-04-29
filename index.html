@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -29,8 +29,9 @@
 [data-theme="light"] [data-theme="light"] .site-header{background:linear-gradient(180deg,rgba(255,255,255,.65) 0%,transparent 100%);color:#1a1814;}
 [data-theme="light"] .site-header.scrolled{color:#1a1814;}
 [data-theme="light"] .site-header.scrolled .nav a{color:#1a1814;}
-[data-theme="light"] .site-header .nav a{color:#1a1814;}
-[data-theme="light"] .site-header.scrolled{background:rgba(250,248,245,.97);}
+[data-theme="light"] .site-header .nav a{color:#1a1814 !important;opacity:.8;}
+[data-theme="light"] .site-header.scrolled{background:rgba(250,248,245,.97) !important;color:#1a1814 !important;}
+[data-theme="light"] .site-header.scrolled .nav a{color:#1a1814 !important;opacity:.8;}
 [data-theme="light"] .hero-overlay{background:linear-gradient(to bottom,rgba(250,248,245,.15) 0%,rgba(250,248,245,.55) 100%);}
 [data-theme="light"] .tile img{filter:brightness(.97);}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -874,7 +875,7 @@ document.querySelectorAll('.nav a').forEach(a => {
 
 // Theme toggle
 const themeToggle = document.getElementById('themeToggle');
-const savedTheme = localStorage.getItem('theme') || 'dark';
+const savedTheme = localStorage.getItem('theme') || 'dark'; // dark is default
 document.documentElement.setAttribute('data-theme', savedTheme);
 themeToggle.addEventListener('click', () => {
   const current = document.documentElement.getAttribute('data-theme');
