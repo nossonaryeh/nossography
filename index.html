@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nosson Oirich Photography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0a;
+  --bg-2:#111;
+  --ink:#f3efe7;
+  --ink-dim:#a8a39a;
+  --ink-faint:#6b6760;
+  --accent:#d4a574;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+
+/* HEADER */
+.site-header{
+  position:fixed;top:0;left:0;right:0;
+  z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 36px;
+  transition:background .5s ease, backdrop-filter .5s ease, padding .4s ease;
+  mix-blend-mode:difference;
+  color:#fff;
+}
+.site-header.scrolled{
+  mix-blend-mode:normal;
+  background:rgba(10,10,10,.78);
+  backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  padding:16px 36px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.brand{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:22px;
+  letter-spacing:.02em;
+  font-style:italic;
+}
+.brand b{font-style:normal;font-weight:500}
+.nav{display:flex;gap:28px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:400}
+.nav a{color:inherit;text-decoration:none;opacity:.8;transition:opacity .2s}
+.nav a:hover{opacity:1}
+.ig-link{display:inline-flex;align-items:center;gap:7px;color:inherit;text-decoration:none;opacity:.8;transition:opacity .2s}
+.ig-link:hover{opacity:1;color:var(--accent)}
+.ig-link svg{display:block}
+@media (max-width:760px){
+  .site-header{padding:18px 20px}
+  .nav{display:none}
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  height:100vh;
+  width:100%;
+  overflow:hidden;
+}
+.hero-img{
+  position:absolute;inset:0;
+  background-image:url('photos/E23A8447.jpg');
+  background-size:cover;
+  background-position:center 30%;
+  transform:scale(1.08);
+  animation:heroPan 18s ease-out forwards;
+}
+@keyframes heroPan{
+  from{transform:scale(1.18) translateY(2%)}
+  to{transform:scale(1.04) translateY(0)}
+}
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 60%,rgba(10,10,10,.85) 100%);
+  pointer-events:none;
+}
+.scroll-cue{
+  position:absolute;
+  bottom:38px;left:50%;transform:translateX(-50%);
+  z-index:5;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  color:rgba(255,255,255,.7);
+  font-size:10px;letter-spacing:.4em;text-transform:uppercase;
+  animation:cuePulse 2.4s ease-in-out infinite;
+}
+.scroll-cue::after{
+  content:"";display:block;width:1px;height:46px;
+  background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,0));
+}
+@keyframes cuePulse{
+  0%,100%{transform:translateX(-50%) translateY(0);opacity:.7}
+  50%{transform:translateX(-50%) translateY(8px);opacity:1}
+}
+
+/* SECTIONS */
+.section{
+  position:relative;
+  padding:140px 0 100px;
+}
+.section-head{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:end;
+  gap:32px;
+  padding:0 6vw;
+  margin-bottom:56px;
+}
+.section-num{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:14px;
+  color:var(--ink-faint);
+  letter-spacing:.05em;
+}
+.section-title{
+  font-family:var(--serif);
+  font-weight:300;
+  font-size:clamp(48px,8vw,108px);
+  line-height:.95;
+  letter-spacing:-.02em;
+  color:var(--ink);
+}
+.section-title em{
+  font-style:italic;
+  color:var(--accent);
+  font-weight:400;
+}
+.section-meta{
+  font-size:10px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--ink-dim);
+  text-align:right;
+  padding-bottom:14px;
+}
+.section-rule{
+  height:1px;
+  background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.18) 20%,rgba(255,255,255,.18) 80%,rgba(255,255,255,0));
+  margin:0 6vw 64px;
+}
+
+/* GRID LAYOUTS — varied per section */
+.gallery{padding:0 4vw}
+
+/* Editorial — asymmetric mosaic */
+.mosaic{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:14px;
+}
+.tile{
+  position:relative;
+  overflow:hidden;
+  background:#1a1a1a;
+  cursor:zoom-in;
+}
+.tile img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .9s cubic-bezier(.2,.7,.2,1), filter .6s;
+  filter:brightness(.95) saturate(.95);
+}
+.tile:hover img{transform:scale(1.04);filter:brightness(1.05) saturate(1.05)}
+.tile::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.35) 100%);
+  opacity:0;transition:opacity .4s;
+  pointer-events:none;
+}
+.tile:hover::after{opacity:1}
+
+/* Common spans */
+.s4{grid-column:span 4}.s5{grid-column:span 5}.s6{grid-column:span 6}
+.s7{grid-column:span 7}.s8{grid-column:span 8}.s12{grid-column:span 12}
+.s3{grid-column:span 3}
+.tall{aspect-ratio:3/4}
+.sq{aspect-ratio:1/1}
+.wide{aspect-ratio:3/2}
+.cinema{aspect-ratio:2/1}
+.portrait-tall{aspect-ratio:2/3}
+
+@media (max-width:900px){
+  .mosaic{grid-template-columns:repeat(6,1fr);gap:8px}
+  .s3,.s4,.s5{grid-column:span 3}
+  .s6,.s7,.s8{grid-column:span 6}
+  .s12{grid-column:span 6}
+}
+
+/* Marquee row variant */
+.marquee-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  padding:0 4vw;
+}
+.marquee-row .tile{aspect-ratio:3/4}
+@media (max-width:900px){.marquee-row{grid-template-columns:repeat(2,1fr);gap:8px}}
+
+/* Horizontal scroll strip for nature */
+.strip{
+  display:flex;
+  gap:14px;
+  padding:0 6vw 20px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;
+}
+.strip::-webkit-scrollbar{display:none}
+.strip .tile{
+  flex:0 0 auto;
+  width:min(58vw,640px);
+  height:64vh;
+  scroll-snap-align:start;
+}
+.strip .tile.tall{width:min(40vw,440px)}
+
+/* Section background variants */
+.section.dark-warm{background:linear-gradient(180deg,#0a0a0a 0%,#15110d 50%,#0a0a0a 100%)}
+.section.cool{background:linear-gradient(180deg,#0a0a0a 0%,#0c1318 50%,#0a0a0a 100%)}
+
+/* About */
+.about-wrap{
+  display:flex;
+  justify-content:center;
+  padding:0 6vw;
+}
+.about-portrait{
+  position:relative;
+  width:min(520px,90vw);
+  aspect-ratio:5/7;
+  overflow:hidden;
+  background:#1a1a1a;
+}
+.about-portrait img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 1.2s cubic-bezier(.2,.7,.2,1);
+  filter:brightness(.98) saturate(.98);
+}
+.about-portrait:hover img{transform:scale(1.03)}
+.about-portrait::before{
+  content:"";position:absolute;
+  top:-14px;left:-14px;right:-14px;bottom:-14px;
+  border:1px solid rgba(212,165,116,.25);
+  pointer-events:none;
+  z-index:1;
+}
+
+/* Closing strip */
+.outro{
+  padding:160px 6vw 80px;
+  text-align:center;
+}
+.outro h2{
+  font-family:var(--serif);
+  font-weight:300;
+  font-style:italic;
+  font-size:clamp(36px,5vw,64px);
+  letter-spacing:-.01em;
+  color:var(--ink);
+  margin-bottom:22px;
+}
+.outro h2 b{color:var(--accent);font-weight:400}
+.outro p{
+  color:var(--ink-dim);
+  font-size:13px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.footer{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:28px 36px;
+  border-top:1px solid rgba(255,255,255,.06);
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-faint);
+}
+@media (max-width:760px){.footer{flex-direction:column;gap:10px}}
+
+/* Reveal animation */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1s ease, transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.tile.reveal{transition-delay:var(--d,0ms)}
+
+/* LIGHTBOX */
+.lightbox{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.96);
+  display:none;
+  align-items:center;justify-content:center;
+  z-index:200;
+  padding:40px;
+  cursor:zoom-out;
+}
+.lightbox.open{display:flex}
+.lightbox img{
+  max-width:100%;max-height:100%;
+  object-fit:contain;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  animation:lbIn .4s ease;
+}
+@keyframes lbIn{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:scale(1)}}
+.lb-btn{
+  position:absolute;top:50%;
+  transform:translateY(-50%);
+  width:54px;height:54px;
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(0,0,0,.4);
+  color:#fff;
+  font-size:22px;
+  cursor:pointer;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s, border-color .2s;
+}
+.lb-btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.5)}
+.lb-prev{left:24px}
+.lb-next{right:24px}
+.lb-close{top:24px;right:24px;transform:none}
+.lb-counter{
+  position:absolute;
+  bottom:28px;left:50%;transform:translateX(-50%);
+  font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);
+}
+
+/* Section pull-quote / spacer slabs */
+.pull{
+  padding:120px 8vw;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+.pull-img{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center;
+  filter:brightness(.45) saturate(.9);
+  transform:scale(1.05);
+}
+.pull-text{
+  position:relative;z-index:2;
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:300;
+  font-size:clamp(32px,4.6vw,68px);
+  line-height:1.15;
+  text-align:center;
+  max-width:18ch;
+  color:#fff;
+  text-shadow:0 2px 30px rgba(0,0,0,.4);
+}
+
+</style>
+</head>
+<body>
+
+<header class="site-header" id="header">
+  <div class="brand"><b>Nosson Oirich</b> <i>Photography</i></div>
+  <nav class="nav">
+    <a href="#portraits">Portraits</a>
+    <a href="#concerts">Concerts</a>
+    <a href="#nature">Nature</a>
+    <a href="#creative">Creative</a>
+    <a href="#tangibles">Tangibles</a>
+    <a href="#family">Family &amp; Events</a>
+    <a href="#camp">Camp Fun</a>
+    <a href="#reflective">Reflective</a>
+    <a href="#about">About</a>
+    <a href="https://www.instagram.com/nossography/" target="_blank" rel="noopener" class="ig-link" aria-label="Instagram">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg>
+      <span>@nossography</span>
+    </a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="scroll-cue">Scroll</div>
+</section>
+
+<!-- =============== PORTRAITS =============== -->
+<section class="section" id="portraits">
+  <div class="section-head reveal">
+    <div class="section-num">— 01</div>
+    <h2 class="section-title"><em>Portraits</em></h2>
+    <div class="section-meta">Faces · Light · Stillness</div>
+  </div>
+  <div class="section-rule reveal"></div>
+  <div class="gallery">
+    <div class="mosaic">
+      <div class="tile reveal s7 cinema" data-src="photos/E23A8443.jpg"><img src="photos/E23A8443.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s5 cinema" data-src="photos/146E2493.jpeg"><img src="photos/146E2493.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 tall" data-src="photos/E23A0277.jpg"><img src="photos/E23A0277.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/E23A0785.jpg"><img src="photos/E23A0785.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/E23A0436.jpg"><img src="photos/E23A0436.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/E23A2895.jpg"><img src="photos/E23A2895.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/E23A1030.jpg"><img src="photos/E23A1030.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s3 tall" data-src="photos/FA3D7AB2.jpeg"><img src="photos/FA3D7AB2.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s3 tall" data-src="photos/E23A8415.jpg"><img src="photos/E23A8415.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s3 tall" data-src="photos/GD5A7830.jpg"><img src="photos/GD5A7830.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s3 tall" data-src="photos/E23A2348.jpg"><img src="photos/E23A2348.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s8 cinema" data-src="photos/GD5A8281.jpg"><img src="photos/GD5A8281.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 cinema" data-src="photos/GD5A7888.jpg"><img src="photos/GD5A7888.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 sq" data-src="photos/GD5A8093.jpg"><img src="photos/GD5A8093.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/GD5A8453.jpg"><img src="photos/GD5A8453.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/E23A2266.jpg"><img src="photos/E23A2266.jpg" loading="lazy" alt=""></div>
+    </div>
+  </div>
+</section>
+
+<!-- pull spread -->
+<section class="pull">
+  <div class="pull-img" style="background-image:url('photos/66C008FF.jpeg')"></div>
+</section>
+
+<!-- =============== CONCERTS =============== -->
+<section class="section dark-warm" id="concerts">
+  <div class="section-head reveal">
+    <div class="section-num">— 02</div>
+    <h2 class="section-title"><em>Concerts</em></h2>
+    <div class="section-meta">Stage · Sound · Spotlight</div>
+  </div>
+  <div class="section-rule reveal"></div>
+  <div class="gallery">
+    <div class="mosaic">
+      <div class="tile reveal s12 cinema" data-src="photos/E23A8833.jpg"><img src="photos/E23A8833.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 tall" data-src="photos/E23A5997.jpg"><img src="photos/E23A5997.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/E23A8838.jpg"><img src="photos/E23A8838.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/E23A8842.jpg"><img src="photos/E23A8842.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/E23A6268.jpg"><img src="photos/E23A6268.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/E23A6270.jpg"><img src="photos/E23A6270.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s3 sq" data-src="photos/BE89E7D9.jpeg"><img src="photos/BE89E7D9.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s3 sq" data-src="photos/A62CE96A.jpeg"><img src="photos/A62CE96A.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s3 sq" data-src="photos/D691C3C4.jpeg"><img src="photos/D691C3C4.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s3 sq" data-src="photos/886EC4FB.jpeg"><img src="photos/886EC4FB.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s5 wide" data-src="photos/E23A5645.jpg"><img src="photos/E23A5645.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s7 wide" data-src="photos/E23A5051.jpg"><img src="photos/E23A5051.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 sq" data-src="photos/E23A8985.jpg"><img src="photos/E23A8985.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/E23A9066.jpg"><img src="photos/E23A9066.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/E23A8877.jpg"><img src="photos/E23A8877.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/E23A5127.jpg"><img src="photos/E23A5127.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/E23A6531.jpg"><img src="photos/E23A6531.jpg" loading="lazy" alt=""></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== NATURE =============== -->
+<section class="section cool" id="nature">
+  <div class="section-head reveal">
+    <div class="section-num">— 03</div>
+    <h2 class="section-title"><em>Nature</em></h2>
+    <div class="section-meta">Hour · Horizon · Hush</div>
+  </div>
+  <div class="section-rule reveal"></div>
+
+  <div class="gallery">
+    <div class="mosaic">
+      <div class="tile reveal s8 cinema" data-src="photos/3A071DD4.jpeg"><img src="photos/3A071DD4.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 cinema" data-src="photos/39D8E2FD.jpeg"><img src="photos/39D8E2FD.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 tall" data-src="photos/972635F9.jpeg"><img src="photos/972635F9.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/795A272D.jpeg"><img src="photos/795A272D.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/66F4762A.jpeg"><img src="photos/66F4762A.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/7FF2EABE.jpeg"><img src="photos/7FF2EABE.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/CACEA156.jpeg"><img src="photos/CACEA156.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 sq" data-src="photos/F989B0A7.jpeg"><img src="photos/F989B0A7.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/1AD83369.jpeg"><img src="photos/1AD83369.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/42934A75.jpeg"><img src="photos/42934A75.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s12 cinema" data-src="photos/E23A8538.jpg"><img src="photos/E23A8538.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 tall" data-src="photos/E23A8501.jpg"><img src="photos/E23A8501.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/E23A8514.jpg"><img src="photos/E23A8514.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/E23A8546.jpg"><img src="photos/E23A8546.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s7 wide" data-src="photos/2E349D86.jpeg"><img src="photos/2E349D86.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s5 wide" data-src="photos/DBFDCFD5.jpeg"><img src="photos/DBFDCFD5.jpeg" loading="lazy" alt=""></div>
+    </div>
+  </div>
+</section>
+
+<!-- pull -->
+<section class="pull">
+  <div class="pull-img" style="background-image:url('photos/8EA9A603.jpeg')"></div>
+</section>
+
+<!-- =============== CREATIVE =============== -->
+<section class="section" id="creative">
+  <div class="section-head reveal">
+    <div class="section-num">— 04</div>
+    <h2 class="section-title"><em>Creative</em></h2>
+    <div class="section-meta">Texture · Form · Mood</div>
+  </div>
+  <div class="section-rule reveal"></div>
+  <div class="gallery">
+    <div class="mosaic">
+      <div class="tile reveal s5 tall" data-src="photos/8EA9A603.jpeg"><img src="photos/8EA9A603.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s7 cinema" data-src="photos/706DDF26.jpeg"><img src="photos/706DDF26.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 sq" data-src="photos/7426CFB7.jpeg"><img src="photos/7426CFB7.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/IMG_4225.jpeg"><img src="photos/IMG_4225.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/IMG_4037.jpeg"><img src="photos/IMG_4037.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/BDF0C328.jpeg"><img src="photos/BDF0C328.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/E01A0259.jpeg"><img src="photos/E01A0259.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 tall" data-src="photos/IMG_4642.jpeg"><img src="photos/IMG_4642.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/IMG_4649.jpeg"><img src="photos/IMG_4649.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/IMG_3699.jpeg"><img src="photos/IMG_3699.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/IMG_4157.jpeg"><img src="photos/IMG_4157.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/IMG_3695.jpeg"><img src="photos/IMG_3695.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s12 cinema" data-src="photos/66C008FF.jpeg"><img src="photos/66C008FF.jpeg" loading="lazy" alt=""></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== TANGIBLES =============== -->
+<section class="section cool" id="tangibles">
+  <div class="section-head reveal">
+    <div class="section-num">— 05</div>
+    <h2 class="section-title"><em>Tangibles</em></h2>
+    <div class="section-meta">Object · Detail · Still</div>
+  </div>
+  <div class="section-rule reveal"></div>
+  <div class="gallery">
+    <div class="mosaic">
+      <div class="tile reveal s7 wide" data-src="photos/IMG_4157.jpeg"><img src="photos/IMG_4157.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s5 wide" data-src="photos/E01A0259.jpeg"><img src="photos/E01A0259.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 tall" data-src="photos/7426CFB7.jpeg"><img src="photos/7426CFB7.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/IMG_4225.jpeg"><img src="photos/IMG_4225.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/IMG_4037.jpeg"><img src="photos/IMG_4037.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/A62CE96A.jpeg"><img src="photos/A62CE96A.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/D691C3C4.jpeg"><img src="photos/D691C3C4.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 sq" data-src="photos/886EC4FB.jpeg"><img src="photos/886EC4FB.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/BE89E7D9.jpeg"><img src="photos/BE89E7D9.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/8EA9A603.jpeg"><img src="photos/8EA9A603.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/706DDF26.jpeg"><img src="photos/706DDF26.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/BDF0C328.jpeg"><img src="photos/BDF0C328.jpeg" loading="lazy" alt=""></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== FAMILY & EVENTS =============== -->
+<section class="section dark-warm" id="family">
+  <div class="section-head reveal">
+    <div class="section-num">— 06</div>
+    <h2 class="section-title"><em>Family</em> &amp; Events</h2>
+    <div class="section-meta">Together · Celebrate · Remember</div>
+  </div>
+  <div class="section-rule reveal"></div>
+  <div class="gallery">
+    <div class="mosaic">
+      <div class="tile reveal s7 wide" data-src="photos/E23A6744.jpg"><img src="photos/E23A6744.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s5 wide" data-src="photos/E23A2710.jpg"><img src="photos/E23A2710.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 tall" data-src="photos/E23A6637.jpg"><img src="photos/E23A6637.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/E23A6675.jpg"><img src="photos/E23A6675.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/E23A6724.jpg"><img src="photos/E23A6724.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/E23A6760.jpg"><img src="photos/E23A6760.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/E23A6755.jpg"><img src="photos/E23A6755.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 sq" data-src="photos/E23A2295.jpg"><img src="photos/E23A2295.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/E23A2298.jpg"><img src="photos/E23A2298.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/E23A2345.jpg"><img src="photos/E23A2345.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s12 cinema" data-src="photos/E23A2922.jpg"><img src="photos/E23A2922.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 tall" data-src="photos/E23A2183.jpg"><img src="photos/E23A2183.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/E23A2262.jpg"><img src="photos/E23A2262.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/E23A6395.jpg"><img src="photos/E23A6395.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/E23A7079.jpg"><img src="photos/E23A7079.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/E23A2924.jpg"><img src="photos/E23A2924.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s3 sq" data-src="photos/E23A7268.jpg"><img src="photos/E23A7268.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s3 sq" data-src="photos/E23A7263.jpg"><img src="photos/E23A7263.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s3 sq" data-src="photos/E23A6840.jpg"><img src="photos/E23A6840.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s3 sq" data-src="photos/E23A8469.jpg"><img src="photos/E23A8469.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s5 wide" data-src="photos/E23A2606.jpg"><img src="photos/E23A2606.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s7 wide" data-src="photos/E23A7014.jpg"><img src="photos/E23A7014.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 sq" data-src="photos/E23A2609.jpg"><img src="photos/E23A2609.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/E23A2667.jpg"><img src="photos/E23A2667.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/E23A3009.jpg"><img src="photos/E23A3009.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/E23A2890.jpg"><img src="photos/E23A2890.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/E23A2932.jpg"><img src="photos/E23A2932.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 sq" data-src="photos/E23A7274.jpg"><img src="photos/E23A7274.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/E23A6419.jpg"><img src="photos/E23A6419.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/GD5A8420.jpg"><img src="photos/GD5A8420.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/E23A3081.jpg"><img src="photos/E23A3081.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/E23A2641.jpg"><img src="photos/E23A2641.jpg" loading="lazy" alt=""></div>
+
+      <!-- All Things Special — moved from Camp Simcha -->
+      <div class="tile reveal s12 cinema" data-src="photos/GD5A7976.jpg"><img src="photos/GD5A7976.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 tall" data-src="photos/GD5A7574.jpg"><img src="photos/GD5A7574.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/GD5A7738.jpg"><img src="photos/GD5A7738.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/GD5A7827.jpg"><img src="photos/GD5A7827.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s3 sq" data-src="photos/GD5A7856.jpg"><img src="photos/GD5A7856.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s3 sq" data-src="photos/GD5A7880.jpg"><img src="photos/GD5A7880.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s3 sq" data-src="photos/GD5A7888.jpg"><img src="photos/GD5A7888.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s3 sq" data-src="photos/GD5A7897.jpg"><img src="photos/GD5A7897.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/GD5A7976-2.jpg"><img src="photos/GD5A7976-2.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/GD5A8093.jpg"><img src="photos/GD5A8093.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 sq" data-src="photos/GD5A8142.jpg"><img src="photos/GD5A8142.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/GD5A8281.jpg"><img src="photos/GD5A8281.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/GD5A8453.jpg"><img src="photos/GD5A8453.jpg" loading="lazy" alt=""></div>
+    </div>
+  </div>
+</section>
+
+<!-- pull -->
+<section class="pull">
+  <div class="pull-img" style="background-image:url('photos/E23A1979.jpg')"></div>
+</section>
+
+<!-- =============== CAMP SIMCHA =============== -->
+<section class="section" id="camp">
+  <div class="section-head reveal">
+    <div class="section-num">— 07</div>
+    <h2 class="section-title"><em>Camp</em> Fun</h2>
+    <div class="section-meta">Joy · Brotherhood · Spirit</div>
+  </div>
+  <div class="section-rule reveal"></div>
+  <div class="gallery">
+    <div class="mosaic">
+      <div class="tile reveal s12 cinema" data-src="photos/E23A8443.jpg"><img src="photos/E23A8443.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 tall" data-src="photos/E23A8444.jpg"><img src="photos/E23A8444.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/E23A8445.jpg"><img src="photos/E23A8445.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/E23A8446.jpg"><img src="photos/E23A8446.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/E23A8447.jpg"><img src="photos/E23A8447.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/E23A8448.jpg"><img src="photos/E23A8448.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s7 wide" data-src="photos/E23A1979.jpg"><img src="photos/E23A1979.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s5 wide" data-src="photos/E23A2154.jpg"><img src="photos/E23A2154.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 sq" data-src="photos/E23A0427.jpg"><img src="photos/E23A0427.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/E23A1021.jpg"><img src="photos/E23A1021.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/E23A1048.jpg"><img src="photos/E23A1048.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/E23A5474.jpg"><img src="photos/E23A5474.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/E23A8685.jpg"><img src="photos/E23A8685.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 tall" data-src="photos/E23A7388.jpg"><img src="photos/E23A7388.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/E23A7424.jpg"><img src="photos/E23A7424.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/E23A7462.jpg"><img src="photos/E23A7462.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s5 wide" data-src="photos/E23A7487.jpg"><img src="photos/E23A7487.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s7 wide" data-src="photos/E23A7500.jpg"><img src="photos/E23A7500.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 sq" data-src="photos/E23A1049.jpg"><img src="photos/E23A1049.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/E23A8744.jpg"><img src="photos/E23A8744.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/E23A8238.jpg"><img src="photos/E23A8238.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/E23A7334.jpg"><img src="photos/E23A7334.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/E23A1030.jpg"><img src="photos/E23A1030.jpg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 sq" data-src="photos/E23A7285.jpg"><img src="photos/E23A7285.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/E23A7310.jpg"><img src="photos/E23A7310.jpg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 sq" data-src="photos/E23A7364.jpg"><img src="photos/E23A7364.jpg" loading="lazy" alt=""></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== REFLECTIVE =============== -->
+<section class="section cool" id="reflective">
+  <div class="section-head reveal">
+    <div class="section-num">— 08</div>
+    <h2 class="section-title"><em>Reflective</em></h2>
+    <div class="section-meta">Memory · Quiet · Light</div>
+  </div>
+  <div class="section-rule reveal"></div>
+  <div class="gallery">
+    <div class="mosaic">
+      <div class="tile reveal s7 wide" data-src="photos/IMG_4157.jpeg"><img src="photos/IMG_4157.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s5 wide" data-src="photos/IMG_4225.jpeg"><img src="photos/IMG_4225.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s4 tall" data-src="photos/IMG_4037.jpeg"><img src="photos/IMG_4037.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/IMG_3667.jpeg"><img src="photos/IMG_3667.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s4 tall" data-src="photos/IMG_3695.jpeg"><img src="photos/IMG_3695.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/IMG_3699.jpeg"><img src="photos/IMG_3699.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/IMG_1786.jpeg"><img src="photos/IMG_1786.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 wide" data-src="photos/IMG_4642.jpeg"><img src="photos/IMG_4642.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 wide" data-src="photos/IMG_4649.jpeg"><img src="photos/IMG_4649.jpeg" loading="lazy" alt=""></div>
+
+      <div class="tile reveal s6 tall" data-src="photos/E01A0259.jpeg"><img src="photos/E01A0259.jpeg" loading="lazy" alt=""></div>
+      <div class="tile reveal s6 tall" data-src="photos/8EA9A603.jpeg"><img src="photos/8EA9A603.jpeg" loading="lazy" alt=""></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== ABOUT =============== -->
+<section class="section" id="about">
+  <div class="section-head reveal">
+    <div class="section-num">— 09</div>
+    <h2 class="section-title"><em>About</em></h2>
+    <div class="section-meta">The Photographer</div>
+  </div>
+  <div class="section-rule reveal"></div>
+  <div class="about-wrap reveal">
+    <figure class="about-portrait">
+      <img src="photos/about-nosson.jpeg" alt="Nosson Oirich" loading="lazy">
+    </figure>
+  </div>
+</section>
+
+<section class="outro reveal">
+  <div class="section-num" style="margin-bottom:18px">— Fin</div>
+</section>
+
+<footer class="footer">
+  <div>© Nosson Oirich Photography</div>
+  <div class="foot-ig">
+    <a href="https://www.instagram.com/nossography/" target="_blank" rel="noopener" class="ig-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg>
+      <span>@nossography</span>
+    </a>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-btn lb-close" aria-label="Close">×</button>
+  <button class="lb-btn lb-prev" aria-label="Previous">‹</button>
+  <img id="lb-img" alt="">
+  <button class="lb-btn lb-next" aria-label="Next">›</button>
+  <div class="lb-counter" id="lb-counter"></div>
+</div>
+
+<script>
+// Header scroll effect
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 80) header.classList.add('scrolled');
+  else header.classList.remove('scrolled');
+}, {passive:true});
+
+// Reveal on scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting){
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, {threshold:0.08, rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  // Stagger tiles within a mosaic
+  const idx = [...el.parentElement.children].indexOf(el);
+  el.style.setProperty('--d', Math.min(idx*60, 600) + 'ms');
+  io.observe(el);
+});
+
+// LIGHTBOX
+const tiles = [...document.querySelectorAll('.tile')];
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+const lbCounter = document.getElementById('lb-counter');
+let currentIdx = -1;
+let currentList = [];
+
+function openLB(tile){
+  // build list from the current section
+  const section = tile.closest('.section');
+  currentList = [...section.querySelectorAll('.tile')];
+  currentIdx = currentList.indexOf(tile);
+  showCurrent();
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function showCurrent(){
+  const t = currentList[currentIdx];
+  lbImg.src = t.dataset.src;
+  lbCounter.textContent = (currentIdx+1) + ' / ' + currentList.length;
+}
+function closeLB(){
+  lb.classList.remove('open');
+  document.body.style.overflow='';
+}
+function next(){currentIdx = (currentIdx+1) % currentList.length; showCurrent();}
+function prev(){currentIdx = (currentIdx-1+currentList.length) % currentList.length; showCurrent();}
+
+tiles.forEach(t => t.addEventListener('click', () => openLB(t)));
+document.querySelector('.lb-close').addEventListener('click', (e)=>{e.stopPropagation();closeLB();});
+document.querySelector('.lb-next').addEventListener('click', (e)=>{e.stopPropagation();next();});
+document.querySelector('.lb-prev').addEventListener('click', (e)=>{e.stopPropagation();prev();});
+lb.addEventListener('click', (e) => { if (e.target === lb) closeLB(); });
+window.addEventListener('keydown', (e) => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLB();
+  if (e.key === 'ArrowRight') next();
+  if (e.key === 'ArrowLeft') prev();
+});
+
+// Smooth nav scroll
+document.querySelectorAll('.nav a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+</script>
+</body>
+</html>
