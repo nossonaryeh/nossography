@@ -844,6 +844,7 @@ window.addEventListener('keydown', (e) => {
 
 // Smooth nav scroll
 document.querySelectorAll('.nav a').forEach(a => {
+  if (!a.getAttribute('href').startsWith('#')) return;
   a.addEventListener('click', (e) => {
     e.preventDefault();
     const target = document.querySelector(a.getAttribute('href'));
